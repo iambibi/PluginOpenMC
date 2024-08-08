@@ -3,26 +3,20 @@ package fr.communaywen.core.contest;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.WorldGuard;
 import com.sk89q.worldguard.protection.flags.Flags;
-import com.sk89q.worldguard.protection.flags.StringFlag;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.managers.storage.StorageException;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import fr.communaywen.core.AywenCraftPlugin;
-import fr.communaywen.core.contest.ContestManager;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.time.DayOfWeek;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-
-import static com.sk89q.worldguard.protection.flags.Flags.TIME_LOCK;
 
 
 public class ContestListener implements Listener {

@@ -54,7 +54,6 @@ public class ContestManager extends DatabaseConnector {
         String currentDayString = currentDate.format(formatter);
 
         //conversion ex ven. => FRIDAY
-        DayOfWeek currentDayOfWeek = DayOfWeek.from(formatter.parse(currentDayString));
-        return currentDayOfWeek;
+        return DayOfWeek.from(formatter.parse(currentDayString));
     }
 }

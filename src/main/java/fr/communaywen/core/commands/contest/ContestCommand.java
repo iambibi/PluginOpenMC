@@ -1,22 +1,16 @@
 package fr.communaywen.core.commands.contest;
 
-import fr.communaywen.core.AywenCraftPlugin;
 import fr.communaywen.core.contest.ContestManager;
 import fr.communaywen.core.credit.Credit;
 import fr.communaywen.core.credit.Feature;
 import fr.communaywen.core.utils.database.DatabaseConnector;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import revxrsal.commands.annotation.Command;
 import revxrsal.commands.annotation.Description;
 import java.time.DayOfWeek;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
@@ -30,7 +24,7 @@ public class ContestCommand extends DatabaseConnector {
         int phase = ContestManager.getInt("phase");
         String dayStartContest = ContestManager.getString("startdate");
             if (phase==2) {
-
+System.out.println("ouvrir panel");
 
             } else {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E", Locale.FRENCH);
