@@ -8,6 +8,7 @@ import fr.communaywen.core.claim.ClaimListener;
 import fr.communaywen.core.claim.GamePlayer;
 import fr.communaywen.core.claim.RegionManager;
 import fr.communaywen.core.commands.credits.CreditCommand;
+import fr.communaywen.core.commands.contest.ContestCommand;
 import fr.communaywen.core.commands.credits.FeatureCommand;
 import fr.communaywen.core.commands.economy.AdminShopCommand;
 import fr.communaywen.core.commands.economy.BaltopCommand;
@@ -25,6 +26,7 @@ import fr.communaywen.core.commands.socials.DiscordCommand;
 import fr.communaywen.core.commands.socials.GithubCommand;
 import fr.communaywen.core.commands.teams.TeamAdminCommand;
 import fr.communaywen.core.commands.teams.TeamCommand;
+import fr.communaywen.core.contest.ContestListener;
 import fr.communaywen.core.fallblood.BandageRecipe;
 import fr.communaywen.core.clockinfos.tasks.CompassClockTask;
 import fr.communaywen.core.friends.commands.FriendsCommand;
@@ -162,6 +164,7 @@ public final class AywenCraftPlugin extends JavaPlugin {
                 new SpawnCommand(this),
                 new RulesCommand(managers.getBookConfig()),
                 new TeamCommand(),
+                new ContestCommand(),
                 new MoneyCommand(this),
                 new ScoreboardCommand(),
                 new ProutCommand(),
@@ -236,7 +239,8 @@ public final class AywenCraftPlugin extends JavaPlugin {
                 new PasFraisListener(this),
                 new ClaimListener(),
                 new FarineListener(),
-                new FallBloodListener()
+                new FallBloodListener(),
+                new ContestListener(this)
         );
 
         getServer().getPluginManager().registerEvents(eventsManager, this); // TODO: refactor

@@ -5,7 +5,10 @@ import lombok.Getter;
 
 import java.lang.reflect.Method;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.sql.SQLException;
 
 public class DatabaseManager {
@@ -67,6 +70,42 @@ public class DatabaseManager {
                 "  player varchar(36) NOT NULL PRIMARY KEY," +
                 "  balance double NOT NULL" +
                 ")").executeUpdate();
+
+        // Système de Contest
+        this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS all_contest (camp1 VARCHAR(36), color1 VARCHAR(36), camp2 VARCHAR(36), color2 VARCHAR(36), selected int(11))").executeUpdate();
+        PreparedStatement statement = connection.getConnection().prepareStatement("SELECT COUNT(*) FROM all_contest");
+        ResultSet result = statement.executeQuery();
+
+        // push all contest theme
+        if(result.next()) {
+            if(result.getInt(1) == 0) {
+                this.getConnection().prepareStatement("INSERT INTO all_contest (camp1, color1, camp2, color2, selected) VALUES ('Chaos', 'ORANGE', 'Ordre', 'WHITE', '0')").executeUpdate();
+                this.getConnection().prepareStatement("INSERT INTO all_contest (camp1, color1, camp2, color2, selected) VALUES ('Mayonnaise', 'YELLOW', 'Ketchup', 'RED', '0')").executeUpdate();
+                this.getConnection().prepareStatement("INSERT INTO all_contest (camp1, color1, camp2, color2, selected) VALUES ('Pates', 'YELLOW', 'Riz', 'WHITE', '0')").executeUpdate();
+                this.getConnection().prepareStatement("INSERT INTO all_contest (camp1, color1, camp2, color2, selected) VALUES ('Samsung', 'BLACK', 'Apple', 'WHITE', '0')").executeUpdate();
+                this.getConnection().prepareStatement("INSERT INTO all_contest (camp1, color1, camp2, color2, selected) VALUES ('Montagne', 'LIGHT_GRAY', 'Mer', 'LIGHT_BLUE', '0')").executeUpdate();
+                // => pour ajouter des nouveaux contests il faut imprérativement reset la table all_contest
+            }
+        }
+
+        // table prog contest
+        this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS contest (phase int(11), camp1 VARCHAR(36), color1 VARCHAR(36), camp2 VARCHAR(36), color2 VARCHAR(36), startdate VARCHAR(36), points1 int(11), points2 int(11))").executeUpdate();
+        PreparedStatement state = connection.getConnection().prepareStatement("SELECT COUNT(*) FROM contest");
+        ResultSet rs = state.executeQuery();
+
+        // push first contest
+        if(rs.next()) {
+            if(rs.getInt(1) == 0) {
+                PreparedStatement states = this.getConnection().prepareStatement("INSERT INTO contest (phase, camp1, color1, camp2, color2, startdate, points1, points2) VALUES (1, 'Ketchup', 'RED', 'Mayonnaise', 'YELLOW', ?, 0,0)");
+
+                String dateContestStart = "jeu.";
+                states.setString(1, dateContestStart);
+                states.executeUpdate();
+            }
+        }
+
+        // table camps
+        this.getConnection().prepareStatement("CREATE TABLE IF NOT EXISTS camps (minecraft_uuid VARCHAR(36), camps int(11))").executeUpdate();
 
         System.out.println("Les tables ont été créer si besoin");
     }
